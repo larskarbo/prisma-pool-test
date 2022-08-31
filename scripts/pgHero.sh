@@ -1,0 +1,1 @@
+docker run -ti -e DATABASE_URL=postgres://lars:@host.docker.internal:5432/layer3 -p 8080:8080 ankane/pghero
