@@ -12,8 +12,9 @@
     "start": "next start",
     "db:migrate": "npx dotenv -e .env.local npx prisma migrate dev --skip-seed",
     "db:seed": "npx dotenv -e .env.local npx prisma db seed",
-    "test:k6": "k6 run scripts/k6.ts",
-    "pghero": "sh scripts/pgHero.sh"
+    "test:k6": "k6 run scripts/k6.js",
+    "pghero": "sh scripts/pgHero.sh",
+    "pgBouncer": "sh scripts/pgBouncer.sh"
   },
   "dependencies": {
     "@prisma/client": "4.3.0",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "16.11.56",
+    "@types/pg": "^8.6.5",
     "@types/react": "18.0.18",
     "prisma": "4.3.0",
     "ts-node": "10.9.1",
