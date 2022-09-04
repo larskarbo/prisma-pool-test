@@ -14,7 +14,7 @@
     "db:seed": "npx dotenv -e .env.local npx prisma db seed",
     "test:k6": "k6 run scripts/k6.js",
     "pghero": "sh scripts/pgHero.sh",
-    "pgBouncer": "sh scripts/pgBouncer.sh"
+    "pgbouncer": "sh scripts/pgBouncer.sh"
   },
   "dependencies": {
     "@prisma/client": "4.3.0",

@@ -1,13 +1,15 @@
 import { check } from "k6";
 import http from "k6/http";
 
-const url_base = "http://localhost:3000/api/getUserPg?name=Some%20One%2095000";
+const url_base = `http://localhost:3000/api/${
+  __ENV.USE_PG ? "fetchRowPg" : "fetchRowPrisma"
+}`;
 
 export const options = {
   stages: [
     { duration: "1s", target: 500 },
     { duration: "5s", target: 500 },
-    { duration: "1s", target: 0 },
+    { duration: "10s", target: 0 },
   ],
 };
 
@@ -16,6 +18,7 @@ export default function () {
     headers: {
       "Content-Type": "application/json",
     },
+    timeout: "10s",
   };
 
   const res = http.get(url_base, params);

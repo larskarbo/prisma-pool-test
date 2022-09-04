@@ -1,14 +1,10 @@
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "postgresql"
-  // DATABASE_URL is used here to provide a fallback for some specific CLI usecases.
-  // In code, we always pass a custom url in new PrismaClient() and override this.
-  url      = env("DATABASE_URL_PRISMA")
+  url      = env("DATABASE_URL")
 }
-
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique

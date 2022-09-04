@@ -1,25 +1,17 @@
-import { isArray } from "lodash";
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
 
-// GET /api/getUser?name=:name
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { name } = req.query;
-
-  if (isArray(name)) {
-    throw new Error("name must be a string");
-  }
+  const name = "Some One 95000";
 
   const resultPosts = await prisma.user.findFirst({
     where: {
       name: name,
     },
-    // include: {
-    //   posts: true,
-    // }
   });
+
   res.json(resultPosts);
 }
