@@ -1,17 +1,18 @@
+import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../lib/prisma";
+import { complexUserSelect } from "../../lib/query-testing/complexUserSelect";
 
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const name = "Some One 95000";
-
-  const resultPosts = await prisma.user.findFirst({
-    where: {
-      name: name,
-    },
+export default async function test(_: NextApiRequest, res: NextApiResponse) {
+  const prisma = new PrismaClient({
+    log: ["query"],
   });
 
-  res.json(resultPosts);
+  res.json(
+    await prisma.user.findFirst({
+      select: complexUserSelect,
+      where: {
+        email: "asdf",
+      },
+    })
+  );
 }
