@@ -32,6 +32,8 @@ async function main() {
     data: {
       email: "john.doe@example.com",
       name: "John Doe",
+      quote: "Basic quote",
+      slogan: "One dev to rule them all",
     },
   });
 
@@ -39,6 +41,8 @@ async function main() {
     data: {
       email: "jane.doe@example.com",
       name: "Jane Doe",
+      quote: "Basic quote",
+      slogan: "Design is how it works",
     },
   });
 

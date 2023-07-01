@@ -3,9 +3,18 @@ import prisma from "../../lib/prisma";
 import { complexUserSelect, getComplexUserSelect } from "./complexUserSelect";
 
 export default async function queries(_: NextApiRequest, res: NextApiResponse) {
-  await prisma.user.findFirst({
+  await prisma.user.findFirstOrThrow({
+    select: {
+      name: true,
+      email: true,
+      _count: {
+        select: {
+          Comments: true,
+        },
+      },
+    },
     where: {
-      id: 1,
+      id: 1000,
     },
   });
 
@@ -20,8 +29,25 @@ export default async function queries(_: NextApiRequest, res: NextApiResponse) {
   });
 
   await prisma.user.findFirst({
-    select: {
-      name: true,
+    where: {
+      quote: "Basic quote",
+      slogan: "One dev to rule them all",
+    },
+  });
+
+  await prisma.user.findFirst({
+		select:{
+			id: true,
+		},
+    where: {
+      AND: [
+        {
+          quote: "Basic quote" as const,
+        },
+        {
+          slogan: "One dev to rule them all",
+        },
+      ],
     },
   });
 
@@ -59,9 +85,16 @@ export default async function queries(_: NextApiRequest, res: NextApiResponse) {
     },
   });
 
+  await prisma.$transaction(async (prisma) => {
+    await prisma.user.findFirst({
+      select: complexUserSelect,
+      where: {},
+    });
+  });
+
   await prisma.user.deleteMany({
     where: {
-      name: "John Doe",
+      id: 1,
     },
   });
 

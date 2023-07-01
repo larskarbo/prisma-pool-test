@@ -12,6 +12,8 @@ model User {
   email     String    @unique
   name      String?
   createdAt DateTime  @default(now())
+  quote     String?
+  slogan    String?
   Posts     Post[]
   Comments  Comment[]
   Profile   Profile?
